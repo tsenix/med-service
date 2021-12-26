@@ -43,6 +43,21 @@ let galerySlider = new Swiper('.galery__slider', {
 		},
 	},
 });
+var ua = window.navigator.userAgent;
+var msie = ua.indexOf("MSIE ");
+var isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
+function isIE() {
+	ua = navigator.userAgent;
+	var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+	return is_ie;
+}
+if (isIE()) {
+	document.querySelector('html').classList.add('ie');
+}
+if (isMobile.any()) {
+	document.querySelector('html').classList.add('_touch');
+}
+
 //MenuOpen===================================================================================
 const menuButton = document.querySelector('.header__menu-top');
 const menuBody = document.querySelector('.header__menu');
@@ -154,10 +169,10 @@ for (let i = 0; i < productItems.length; i++) {
   window.addEventListener('resize', function() {
     if (window.innerWidth < 992) {
       productItem.addEventListener('click', showDescription);
-      productItem.addEventListener('touchstart', showDescription);
+      // productItem.addEventListener('touchend', showDescription);
     } else {
       productItem.removeEventListener('click', showDescription);
-      productItem.removeEventListener('touchstart', showDescription);
+      // productItem.removeEventListener('touchend', showDescription);
     }
   });
 
