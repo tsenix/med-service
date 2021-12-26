@@ -43,20 +43,8 @@ let galerySlider = new Swiper('.galery__slider', {
 		},
 	},
 });
-var ua = window.navigator.userAgent;
-var msie = ua.indexOf("MSIE ");
-var isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
-function isIE() {
-	ua = navigator.userAgent;
-	var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
-	return is_ie;
-}
-if (isIE()) {
-	document.querySelector('html').classList.add('ie');
-}
-if (isMobile.any()) {
-	document.querySelector('html').classList.add('_touch');
-}
+let iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i);
+let event = iOS != null ? "click" : "touchstart";
 
 //MenuOpen===================================================================================
 const menuButton = document.querySelector('.header__menu-top');
@@ -117,13 +105,13 @@ document.addEventListener('click', function(e) {
   }
 });
 
-window.addEventListener('resize', function() {
+// window.addEventListener('resize', function() {
   if (window.innerWidth < 1220) {
     contactButton.addEventListener('click', openContact);
   } else {
     contactButton.removeEventListener('click', openContact);
   }
-});
+// });
 
 let numbers = document.querySelectorAll('.statistic__number');
 for (let i = 0; i < numbers.length; i++) {
@@ -166,7 +154,7 @@ let descriptionItems = document.querySelectorAll('.products__description');
 for (let i = 0; i < productItems.length; i++) {
   let productItem = productItems[i];
 
-  window.addEventListener('resize', function() {
+  // window.addEventListener('resize', function() {
     if (window.innerWidth < 992) {
       productItem.addEventListener('click', showDescription);
       // productItem.addEventListener('touchend', showDescription);
@@ -174,7 +162,7 @@ for (let i = 0; i < productItems.length; i++) {
       productItem.removeEventListener('click', showDescription);
       // productItem.removeEventListener('touchend', showDescription);
     }
-  });
+  // });
 
   function showDescription() {
     let description = productItem.querySelector('.products__description');

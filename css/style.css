@@ -753,9 +753,9 @@ textarea:focus {
   border-radius: 20px;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .products__description::before {
