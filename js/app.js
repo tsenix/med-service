@@ -156,10 +156,10 @@ for (let i = 0; i < productItems.length; i++) {
 
   // window.addEventListener('resize', function() {
     if (window.innerWidth < 992) {
-      productItem.addEventListener('click', showDescription);
+      productItem.addEventListener('touchstart', showDescription);
       // productItem.addEventListener('touchend', showDescription);
     } else {
-      productItem.removeEventListener('click', showDescription);
+      productItem.removeEventListener('touchstart', showDescription);
       // productItem.removeEventListener('touchend', showDescription);
     }
   // });
