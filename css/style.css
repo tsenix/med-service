@@ -111,6 +111,10 @@ body {
   color: #fff;
 }
 
+body._lock {
+  overflow: hidden;
+}
+
 ._container {
   padding: 0 20px;
 }
@@ -524,6 +528,129 @@ textarea:focus {
   height: 35px;
 }
 
+.popup {
+  -webkit-overflow-scrolling: touch;
+  z-index: 100;
+  padding: 15px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: visibility 0.8s ease 0s;
+  -o-transition: visibility 0.8s ease 0s;
+  transition: visibility 0.8s ease 0s;
+  visibility: hidden;
+}
+
+.popup::before {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.8s ease 0s;
+  -o-transition: opacity 0.8s ease 0s;
+  transition: opacity 0.8s ease 0s;
+}
+
+.popup.show {
+  visibility: visible;
+  overflow: auto;
+}
+
+.popup.show::before {
+  opacity: 1;
+}
+
+.popup.show .popup__body {
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup._active {
+  overflow: auto;
+  visibility: visible;
+}
+
+.popup._active::before {
+  opacity: 1;
+}
+
+.popup._active .popup__body {
+  -webkit-transition: all 0.3s ease 0.2s;
+  -o-transition: all 0.3s ease 0.2s;
+  transition: all 0.3s ease 0.2s;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.popup__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  align-items: center;
+}
+
+.popup__body {
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  background-color: #000;
+  height: calc(100vh - 30px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.popup__close {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  z-index: 30;
+  background: url("../img/icons/close.svg") 0 0 no-repeat;
+}
+
+.popup_image {
+  max-width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .wrapper {
   width: 100%;
   min-height: 100%;
@@ -535,10 +662,6 @@ textarea:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.wrapper._lock {
-  overflow: hidden;
 }
 
 .page {
@@ -1143,34 +1266,28 @@ textarea:focus {
   right: 0;
 }
 
-.galery__slider-navigation {
+.galery__slider-arrow {
   position: absolute;
   z-index: 3;
-  left: 0;
   top: 50%;
   -webkit-transform: translateY(calc(-50% - 40px));
       -ms-transform: translateY(calc(-50% - 40px));
           transform: translateY(calc(-50% - 40px));
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-}
-
-.galery__slider-arrow {
   width: 25px;
   height: 95px;
   cursor: pointer;
   background: url("../img/icons/arrow.svg") center/100% no-repeat;
 }
 
+.galery__slider-arrow_left {
+  left: 0;
+}
+
 .galery__slider-arrow_right {
-  -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-          transform: rotate(180deg);
+  right: 0;
+  -webkit-transform: translateY(calc(-50% - 40px)) rotate(180deg);
+      -ms-transform: translateY(calc(-50% - 40px)) rotate(180deg);
+          transform: translateY(calc(-50% - 40px)) rotate(180deg);
 }
 
 .galery__slider-wrap {
@@ -1180,6 +1297,8 @@ textarea:focus {
 .galery__slide {
   padding-top: 100%;
   position: relative;
+  z-index: 5;
+  cursor: pointer;
 }
 
 .galery__slide img {
