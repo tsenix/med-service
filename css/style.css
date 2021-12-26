@@ -691,6 +691,7 @@ textarea:focus {
   width: 100%;
   border: 3px solid #367DF9;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 .products__item-image {

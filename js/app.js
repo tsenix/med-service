@@ -44,7 +44,7 @@ let galerySlider = new Swiper('.galery__slider', {
 	},
 });
 let iOS = navigator.userAgent.match(/iPhone|iPad|iPod/i);
-let event = iOS != null ? "click" : "touchstart";
+let eventMobile = iOS != null ? "click" : "touchstart";
 
 //MenuOpen===================================================================================
 const menuButton = document.querySelector('.header__menu-top');
@@ -149,23 +149,20 @@ for (let i = 0; i < numbers.length; i++) {
   });
 }
 
-let productItems = document.querySelectorAll('.products__item');
+let productBody = document.querySelector('.products__body');
 let descriptionItems = document.querySelectorAll('.products__description');
-for (let i = 0; i < productItems.length; i++) {
-  let productItem = productItems[i];
 
-  // window.addEventListener('resize', function() {
-    if (window.innerWidth < 992) {
-      productItem.addEventListener('touchstart', showDescription);
-      // productItem.addEventListener('touchend', showDescription);
-    } else {
-      productItem.removeEventListener('touchstart', showDescription);
-      // productItem.removeEventListener('touchend', showDescription);
-    }
-  // });
+productBody.addEventListener('click', function(e) {
+  let item = e.target.closest('.products__item');
 
-  function showDescription() {
-    let description = productItem.querySelector('.products__description');
+  if (!item) return;
+
+  showDescription(item);
+});
+
+function showDescription(item) {
+  let description = item.querySelector('.products__description');
+  if (window.innerWidth < 992) {
     description.classList.add('_active');
   }
 }
